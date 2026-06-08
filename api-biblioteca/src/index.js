@@ -6,15 +6,12 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-// Rota de status (para testar se a API está no ar)
 app.get('/', (req, res) => {
   res.json({ mensagem: 'API Biblioteca funcionando!' });
 });
 
-// Rotas de livros
 app.use('/livros', livrosRouter);
 
-// Cria a tabela se não existir e inicia o servidor
 async function iniciar() {
   try {
     await pool.query(`
@@ -25,7 +22,6 @@ async function iniciar() {
         ano INTEGER NOT NULL
       )
     `);
-    console.log('Tabela "livros" pronta.');
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
@@ -33,7 +29,7 @@ async function iniciar() {
     });
   } catch (erro) {
     console.error('Erro ao iniciar:', erro.message);
-    setTimeout(iniciar, 3000); // tenta novamente em 3s (aguarda o banco subir)
+    setTimeout(iniciar, 3000);
   }
 }
 

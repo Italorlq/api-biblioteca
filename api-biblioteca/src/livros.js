@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('./database');
 
-// GET /livros — lista todos os livros
 router.get('/', async (req, res) => {
   try {
     const resultado = await pool.query('SELECT * FROM livros ORDER BY id ASC');
@@ -12,7 +11,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /livros/:id — busca um livro pelo ID
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -26,7 +24,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /livros — cadastra um novo livro
 router.post('/', async (req, res) => {
   try {
     const { titulo, autor, ano } = req.body;
@@ -43,7 +40,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /livros/:id — atualiza um livro
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -61,7 +57,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /livros/:id — remove um livro
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
